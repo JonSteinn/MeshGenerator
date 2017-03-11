@@ -27,22 +27,29 @@ def cross_product(u, v):
     return [u[1]*v[2] - u[2]*v[1], u[2]*v[0] - u[0]*v[2], u[0]*v[1] - u[1]*v[0]]
 
 
-def generate_files_xyz(f, x_min, x_max, x_grid_count, z_min, z_max, z_grid_count):
-    fd = open('../static/models/model.obj', 'w')
+def generate_files_xyz(f, x_min, x_max, x_grid_count, z_min, z_max, z_grid_count, fd):
     dx = (x_max - x_min) / x_grid_count
     dz = (z_max - z_min) / z_grid_count
     for x in range(0, x_grid_count):
         for z in range(0, z_grid_count):
             quad = grid(f, x * dx, z * dz, dx, dz)
             normal = cross_product(vec_from_to(quad[0], quad[1]), vec_from_to(quad[0], quad[2]))
-            print('v {:.6f} {:6f} {:6f}'.format(quad[0][0], quad[0][1], quad[0][2]), file=fd)
-            print('v {:.6f} {:6f} {:6f}'.format(quad[1][0], quad[1][1], quad[1][2]), file=fd)
-            print('v {:.6f} {:6f} {:6f}'.format(quad[2][0], quad[2][1], quad[2][2]), file=fd)
-            print('v {:.6f} {:6f} {:6f}'.format(quad[3][0], quad[3][1], quad[3][2]), file=fd)
-            print('vn {:.6f} {:6f} {:6f}'.format(normal[0], normal[1], normal[2]), file=fd)
+            fd.write('v {:.6f} {:6f} {:6f}\n'.format(quad[0][0], quad[0][1], quad[0][2]))
+            fd.write('v {:.6f} {:6f} {:6f}\n'.format(quad[1][0], quad[1][1], quad[1][2]))
+            fd.write('v {:.6f} {:6f} {:6f}\n'.format(quad[2][0], quad[2][1], quad[2][2]))
+            fd.write('v {:.6f} {:6f} {:6f}\n'.format(quad[3][0], quad[3][1], quad[3][2]))
+            fd.write('vn {:.6f} {:6f} {:6f}\n'.format(normal[0], normal[1], normal[2]))
+            #print('v {:.6f} {:6f} {:6f}'.format(quad[0][0], quad[0][1], quad[0][2]), file=fd)
+            #print('v {:.6f} {:6f} {:6f}'.format(quad[1][0], quad[1][1], quad[1][2]), file=fd)
+            #print('v {:.6f} {:6f} {:6f}'.format(quad[2][0], quad[2][1], quad[2][2]), file=fd)
+            #print('v {:.6f} {:6f} {:6f}'.format(quad[3][0], quad[3][1], quad[3][2]), file=fd)
+            #print('vn {:.6f} {:6f} {:6f}'.format(normal[0], normal[1], normal[2]), file=fd)
             index = z * 4 + (z_grid_count * 4 * x)
-            print('f {:d} {:d} {:d}'.format(index + 1, index + 3, index + 4), file=fd)
-            print('f {:d} {:d} {:d}'.format(index + 1, index + 4, index + 2), file=fd)
-            print('f {:d} {:d} {:d}'.format(index + 1, index + 2, index + 4), file=fd)
-            print('f {:d} {:d} {:d}'.format(index + 1, index + 4, index + 3), file=fd)
-    fd.close()
+            fd.write('f {:d} {:d} {:d}\n'.format(index + 1, index + 3, index + 4))
+            fd.write('f {:d} {:d} {:d}\n'.format(index + 1, index + 4, index + 2))
+            fd.write('f {:d} {:d} {:d}\n'.format(index + 1, index + 2, index + 4))
+            fd.write('f {:d} {:d} {:d}\n'.format(index + 1, index + 4, index + 3))
+            #print('f {:d} {:d} {:d}'.format(index + 1, index + 3, index + 4), file=fd)
+            #print('f {:d} {:d} {:d}'.format(index + 1, index + 4, index + 2), file=fd)
+            #print('f {:d} {:d} {:d}'.format(index + 1, index + 2, index + 4), file=fd)
+            #print('f {:d} {:d} {:d}'.format(index + 1, index + 4, index + 3), file=fd)

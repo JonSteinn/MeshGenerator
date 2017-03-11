@@ -5,41 +5,53 @@ var speed = 0.2;
 
 function init(){
 	scene = new THREE.Scene();
-	camera = new THREE.PerspectiveCamera(90, 1.77777778, 0.1, 1000);
-	
-	ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
-	scene.add(ambientLight);
-	
-	light = new THREE.PointLight(0xffffff, .9, 500);
-	light.shadow.camera.near = 0.1;
-	light.shadow.camera.far = 25;
-	scene.add(light);
+	fillScene();
+	renderer = new THREE.WebGLRenderer();
+	renderer.setSize(500*1.77777778, 500);
+	document.body.appendChild(renderer.domElement);
+	animate();
+}
 
+function addObject(){
 	// Model/material loading!
 	var mtlLoader = new THREE.MTLLoader();
 	mtlLoader.load("", function(materials) {
 		materials.preload();
 		var objLoader = new THREE.OBJLoader();
-		objLoader.setMaterials(materials);		
-		objLoader.load("/static/models/t1.obj", function(mesh){
+		objLoader.setMaterials(materials);
+		objLoader.load("/static/models/model.obj", function(mesh){
 			scene.add(mesh);
 			mesh.position.set(0, 0, 0);
 			mesh.rotation.y = -Math.PI/4;
 		});
 	});
-	
-	camera.position.set(0, 0, -100);
-	camera.lookAt(new THREE.Vector3(0,0,0));
-	
-	renderer = new THREE.WebGLRenderer();
-	renderer.setSize(500*1.77777778, 500);
-
-	document.body.appendChild(renderer.domElement);
-	
-	animate();
 }
 
+function addCamera(){
+	camera = new THREE.PerspectiveCamera(90, 1.77777778, 0.1, 1000);
+	camera.position.set(0, 0, -100);
+	camera.lookAt(new THREE.Vector3(0,0,0));
+}
+
+function addLights(){
+	ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+	scene.add(ambientLight);
+
+	light = new THREE.PointLight(0xffffff, .9, 500);
+	light.shadow.camera.near = 0.1;
+	light.shadow.camera.far = 25;
+	scene.add(light);
+}
+
+function fillScene(){
+	addCamera();
+	addLights();
+	addObject();
+}
+
+
 function animate(){
+
 	requestAnimationFrame(animate);
 
 	if(keyboard[87]){
