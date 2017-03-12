@@ -7,12 +7,12 @@ def parse(command):
         .replace('^', '**')\
         .replace('E', 'math.e')\
         .replace('PI', 'math.pi')\
-        .replace('cosh', '!')\
-        .replace('sinh', '@')\
-        .replace('tanh', '#')\
         .replace('acosh', '$')\
         .replace('asinh', '%')\
         .replace('atanh', '&')\
+        .replace('cosh', '!')\
+        .replace('sinh', '@')\
+        .replace('tanh', '#')\
         .replace('atan2', '[')\
         .replace('atan', ']')\
         .replace('acos', '{')\

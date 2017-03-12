@@ -28,7 +28,7 @@ function addObject(){
 
 function addCamera(){
 	camera = new THREE.PerspectiveCamera(90, 1.77777778, 0.1, 1000);
-	camera.position.set(0, 0, -10);
+	camera.position.set(-10, 0, -10);
 	camera.lookAt(new THREE.Vector3(0,0,0));
 }
 
