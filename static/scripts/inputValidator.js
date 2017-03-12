@@ -217,7 +217,7 @@ function toast(msg, id) {
     var x = document.getElementById(id)
     x.innerHTML = msg;
     x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 
 function isInt(value) {

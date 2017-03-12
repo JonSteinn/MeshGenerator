@@ -7,7 +7,7 @@ from flask import render_template
 from flask import request
 from flask import send_from_directory
 
-from FilePaths import inModels
+from FilePaths import in_models
 from py_scripts import functions, obj_gen, file_handler
 
 
@@ -24,7 +24,7 @@ def home():
 def func3():
     if request.method == 'POST':
         try:
-            with open(inModels('model.obj'), 'w') as fd:
+            with open(in_models('model.obj'), 'w') as fd:
                 obj_gen.generate_files_xyz(
                     functions.eval_xyz(request.form['func']),
                     float(request.form['min_x']),
@@ -36,7 +36,7 @@ def func3():
                     fd
                 )
         except (NameError, ValueError, ZeroDivisionError, TypeError, ArithmeticError, FloatingPointError):
-            shutil.copy(inModels('error.obj'), inModels('model.obj'))
+            shutil.copy(in_models('error.obj'), in_models('model.obj'))
         except:
             print(sys.exc_info()[0])
     return redirect('/')
@@ -46,7 +46,7 @@ def func3():
 def func_para():
     if request.method == 'POST':
         try:
-            with open(inModels('model.obj'), 'w') as fd:
+            with open(in_models('model.obj'), 'w') as fd:
                 obj_gen.generate_files_parametric(
                     functions.eval_parametric(request.form['funcX'], request.form['funcY'], request.form['funcZ']),
                     float(request.form['min_u']),
@@ -58,7 +58,7 @@ def func_para():
                     fd
                 )
         except (NameError, ValueError, ZeroDivisionError, TypeError, ArithmeticError, FloatingPointError):
-            shutil.copy(inModels('error.obj'), inModels('model.obj'))
+            shutil.copy(in_models('error.obj'), in_models('model.obj'))
     return redirect('/')
 
 

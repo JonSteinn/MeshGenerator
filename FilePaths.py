@@ -6,9 +6,9 @@ MODELS_ROOT = os.path.join(STATIC_ROOT, 'models')
 DOWNLOAD_ROOT = os.path.join(MODELS_ROOT, 'download')
 
 
-def inDownload(filename):
+def in_download(filename):
     return os.path.join(DOWNLOAD_ROOT, filename)
 
 
-def inModels(filename):
+def in_models(filename):
     return os.path.join(MODELS_ROOT, filename)
