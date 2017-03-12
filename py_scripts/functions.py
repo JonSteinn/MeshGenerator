@@ -4,6 +4,7 @@ import math
 def parse(command):
     command = command.translate({ord(c): '' for c in " !@#$%&[]{};:,?\|`~_"})
     command = command\
+        .replace('lambda', '')\
         .replace('^', '**')\
         .replace('E', 'math.e')\
         .replace('PI', 'math.pi')\

@@ -1,9 +1,13 @@
+import os
+import shutil
+import sys
 from flask import Flask
 from flask import redirect
 from flask import render_template
 from flask import request
 from flask import send_from_directory
 
+from FilePaths import inModels
 from py_scripts import functions, obj_gen, file_handler
 
 
@@ -19,36 +23,42 @@ def home():
 @app.route('/func3', methods=['GET', 'POST'])
 def func3():
     if request.method == 'POST':
-        with open('/Users/Jonni/Desktop/mesh/static/models/model.obj', 'w') as fd:  # TODO: remove hardcoded path
-            obj_gen.generate_files_xyz(
-                functions.eval_xyz(request.form['func']),
-                float(request.form['min_x']),
-                float(request.form['max_x']),
-                int(request.form['grid_x']),
-                float(request.form['min_z']),
-                float(request.form['max_z']),
-                int(request.form['grid_z']),
-                fd
-            )
-            fd.close()
+        try:
+            with open(inModels('model.obj'), 'w') as fd:
+                obj_gen.generate_files_xyz(
+                    functions.eval_xyz(request.form['func']),
+                    float(request.form['min_x']),
+                    float(request.form['max_x']),
+                    int(request.form['grid_x']),
+                    float(request.form['min_z']),
+                    float(request.form['max_z']),
+                    int(request.form['grid_z']),
+                    fd
+                )
+        except (NameError, ValueError, ZeroDivisionError, TypeError, ArithmeticError, FloatingPointError):
+            shutil.copy(inModels('error.obj'), inModels('model.obj'))
+        except:
+            print(sys.exc_info()[0])
     return redirect('/')
 
 
 @app.route('/funcPara', methods=['GET', 'POST'])
 def func_para():
     if request.method == 'POST':
-        with open('/Users/Jonni/Desktop/mesh/static/models/model.obj', 'w') as fd:  # TODO: remove hardcoded path
-            obj_gen.generate_files_parametric(
-                functions.eval_parametric(request.form['funcX'], request.form['funcY'], request.form['funcZ']),
-                float(request.form['min_u']),
-                float(request.form['max_u']),
-                int(request.form['grid_u']),
-                float(request.form['min_v']),
-                float(request.form['max_v']),
-                int(request.form['grid_v']),
-                fd
-            )
-            fd.close()
+        try:
+            with open(inModels('model.obj'), 'w') as fd:
+                obj_gen.generate_files_parametric(
+                    functions.eval_parametric(request.form['funcX'], request.form['funcY'], request.form['funcZ']),
+                    float(request.form['min_u']),
+                    float(request.form['max_u']),
+                    int(request.form['grid_u']),
+                    float(request.form['min_v']),
+                    float(request.form['max_v']),
+                    int(request.form['grid_v']),
+                    fd
+                )
+        except (NameError, ValueError, ZeroDivisionError, TypeError, ArithmeticError, FloatingPointError):
+            shutil.copy(inModels('error.obj'), inModels('model.obj'))
     return redirect('/')
 
 
