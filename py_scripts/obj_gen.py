@@ -36,7 +36,7 @@ def cross_product(u, v):
     return [u[1]*v[2] - u[2]*v[1], u[2]*v[0] - u[0]*v[2], u[0]*v[1] - u[1]*v[0]]
 
 
-def write_quad(quad, fd, index):
+def write_obj_quad(quad, fd, index):
     normal = cross_product(vec_from_to(quad[0], quad[1]), vec_from_to(quad[0], quad[2]))
     fd.write('v {:.6f} {:6f} {:6f}\n'.format(quad[0][0], quad[0][1], quad[0][2]))
     fd.write('v {:.6f} {:6f} {:6f}\n'.format(quad[1][0], quad[1][1], quad[1][2]))
@@ -55,7 +55,7 @@ def generate_files_xyz(f, x_min, x_max, x_grid_count, z_min, z_max, z_grid_count
     for x in range(0, x_grid_count):
         for z in range(0, z_grid_count):
             quad = grid_xyz(f, x_min + x * dx, z_min + z * dz, dx, dz)
-            write_quad(quad, fd, z * 4 + (z_grid_count * 4 * x))
+            write_obj_quad(quad, fd, z * 4 + (z_grid_count * 4 * x))
 
 
 def generate_files_parametric(f, u_min, u_max, u_grid_count, v_min, v_max, v_grid_count, fd):
@@ -64,4 +64,4 @@ def generate_files_parametric(f, u_min, u_max, u_grid_count, v_min, v_max, v_gri
     for u in range(0, u_grid_count):
         for v in range(0, v_grid_count):
             quad = grid_parametric(f, u_min + u * du, v_min + v * dv, du, dv)
-            write_quad(quad, fd, v * 4 + (v_grid_count * 4 * u))
+            write_obj_quad(quad, fd, v * 4 + (v_grid_count * 4 * u))

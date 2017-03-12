@@ -5,26 +5,36 @@ def parse(command):
     command = command.translate({ord(c): '' for c in " !@#$%&[]{};:,?\|`~_"})
     command = command\
         .replace('^', '**')\
-        .replace('E', 'math.E')\
+        .replace('E', 'math.e')\
         .replace('PI', 'math.pi')\
+        .replace('cosh', '!')\
+        .replace('sinh', '@')\
+        .replace('tanh', '#')\
+        .replace('acosh', '$')\
+        .replace('asinh', '%')\
+        .replace('atanh', '&')\
+        .replace('atan2', '[')\
+        .replace('atan', ']')\
+        .replace('acos', '{')\
+        .replace('asin', '}')\
         .replace('sin', 'math.sin')\
         .replace('cos', 'math.cos')\
         .replace('tan', 'math.tan')\
-        .replace('atan', 'math.atan')\
-        .replace('atan2', 'math.atan2')\
-        .replace('acos', 'math.acos')\
-        .replace('asin', 'math.asin')\
+        .replace('{', 'math.acos')\
+        .replace('}', 'math.asin')\
+        .replace(']', 'math.atan')\
+        .replace('[', 'math.atan2')\
+        .replace('!', 'math.cosh')\
+        .replace('@', 'math.sinh')\
+        .replace('#', 'math.tanh')\
+        .replace('$', 'math.acosh')\
+        .replace('%', 'math.asinh')\
+        .replace('&', 'math.atanh')\
         .replace('sqrt', 'math.sqrt')\
         .replace('lg', 'math.log2')\
         .replace('log', 'math.log10')\
         .replace('ln', 'math.log')\
         .replace('ceil', 'math.ceil')\
-        .replace('cosh', 'math.cosh')\
-        .replace('sinh', 'math.sinh')\
-        .replace('tanh', 'math.tanh')\
-        .replace('acosh', 'math.acosh')\
-        .replace('asinh', 'math.asinh')\
-        .replace('atanh', 'math.atanh')\
         .replace('mod', '%')\
         .replace('if', ' if ')\
         .replace('else', ' else ')\

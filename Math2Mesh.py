@@ -1,7 +1,10 @@
 from flask import Flask
+from flask import redirect
 from flask import render_template
 from flask import request
-from py_scripts import functions, obj_gen
+from flask import send_from_directory
+
+from py_scripts import functions, obj_gen, file_handler
 
 
 app = Flask(__name__)
@@ -16,7 +19,7 @@ def home():
 @app.route('/func3', methods=['GET', 'POST'])
 def func3():
     if request.method == 'POST':
-        with open('/Users/Jonni/Desktop/mesh/static/models/model.obj', 'w') as fd:
+        with open('/Users/Jonni/Desktop/mesh/static/models/model.obj', 'w') as fd:  # TODO: remove hardcoded path
             obj_gen.generate_files_xyz(
                 functions.eval_xyz(request.form['func']),
                 float(request.form['min_x']),
@@ -28,13 +31,13 @@ def func3():
                 fd
             )
             fd.close()
-    return render_template('index.html')
+    return redirect('/')
 
 
 @app.route('/funcPara', methods=['GET', 'POST'])
 def func_para():
     if request.method == 'POST':
-        with open('/Users/Jonni/Desktop/mesh/static/models/model.obj', 'w') as fd:
+        with open('/Users/Jonni/Desktop/mesh/static/models/model.obj', 'w') as fd:  # TODO: remove hardcoded path
             obj_gen.generate_files_parametric(
                 functions.eval_parametric(request.form['funcX'], request.form['funcY'], request.form['funcZ']),
                 float(request.form['min_u']),
@@ -46,7 +49,13 @@ def func_para():
                 fd
             )
             fd.close()
-    return render_template('index.html')
+    return redirect('/')
+
+
+@app.route('/dl', methods=['GET'])
+def download():
+    file_handler.zip_objects()
+    return send_from_directory('static', 'models/download/objects.zip')
 
 
 if __name__ == '__main__':
