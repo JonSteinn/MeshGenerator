@@ -8,12 +8,11 @@ function init(){
 	fillScene();
 	renderer = new THREE.WebGLRenderer();
 	renderer.setSize(500*1.77777778, 500);
-	document.body.appendChild(renderer.domElement);
+	document.getElementById("display").appendChild(renderer.domElement);
 	animate();
 }
 
 function addObject(){
-	// Model/material loading!
 	var mtlLoader = new THREE.MTLLoader();
 	mtlLoader.load("", function(materials) {
 		materials.preload();
@@ -29,7 +28,7 @@ function addObject(){
 
 function addCamera(){
 	camera = new THREE.PerspectiveCamera(90, 1.77777778, 0.1, 1000);
-	camera.position.set(0, 0, -100);
+	camera.position.set(0, 0, -10);
 	camera.lookAt(new THREE.Vector3(0,0,0));
 }
 
