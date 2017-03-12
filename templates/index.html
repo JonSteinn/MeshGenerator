@@ -1,29 +1,154 @@
 <!DOCTYPE html>
 <html>
 	<head>
-        <meta http-equiv="cache-control" content="max-age=0" />
-        <meta http-equiv="cache-control" content="no-cache" />
-        <meta http-equiv="expires" content="0" />
-        <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-        <meta http-equiv="pragma" content="no-cache" />
 		<title>Math2Mesh</title>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/three.min.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/MTLLoader.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/OBJLoader.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/renderer.js') }}"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='scripts/pdfobject.min.js') }}"></script>
 	</head>
-	<body style="text-align:center;">
-    <p>Math2Mesh</p>
-    <form action="/func3" method="post">
-        <input type="text" name="func" placeholder="y=f(x,z)"><br>
-        <input type="text" name="min_x" placeholder="min x value"><br>
-        <input type="text" name="max_x" placeholder="max x value"><br>
-        <input type="text" name="grid_x" placeholder="grid count x"><br>
-        <input type="text" name="min_z" placeholder="min z value"><br>
-        <input type="text" name="max_z" placeholder="max z value"><br>
-        <input type="text" name="grid_z" placeholder="grid count z"><br>
-        <input type="submit" value="Preview">
-    </form>
+	<body>
+
+        <h1>Math2Mesh</h1>
+
+        <div>
+            <div id="display"></div>
+        </div>
+
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">&#8477;<sup>2</sup> &#8594; &#8477;</button>
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">A mapping of the xz-plane onto y</h4>
+              </div>
+              <div class="modal-body">
+                <form action="/func3" method="post">
+                    <div class="form-group">
+                        <label for="f">Function:</label>
+                        <textarea class="form-control" rows="1" name="func" placeholder="Example: sin(x)-z^2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="xmi">Min x:</label>
+                        <input type="text" class="form-control" name="min_x" placeholder="Example: 0.3">
+                    </div>
+                    <div class="form-group">
+                        <label for="xma">Max x:</label>
+                        <input type="text" class="form-control" name="max_x" placeholder="Example: 2*PI">
+                    </div>
+                    <div class="form-group">
+                        <label for="xma">Grid count x:</label>
+                        <input type="text" class="form-control" name="grid_x" placeholder="Example: 4">
+                    </div>
+                    <div class="form-group">
+                        <label for="xma">Min z:</label>
+                        <input type="text" class="form-control" name="min_z" placeholder="Example: E">
+                    </div>
+                    <div class="form-group">
+                        <label for="xma">Max z:</label>
+                        <input type="text" class="form-control" name="max_z" placeholder="Example: 51.1">
+                    </div>
+                    <div class="form-group">
+                        <label for="xma">Grid count z:</label>
+                        <input type="text" class="form-control" name="grid_z" placeholder="Example: 22">
+                    </div>
+                    <button type="submit" class="btn btn-info">Create mesh</button>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">&#8477;<sup>2</sup> &#8594; &#8477;<sup>3</sup></button>
+        <div id="myModal2" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">A mapping from a uv-plane onto (x,y,z)</h4>
+              </div>
+              <div class="modal-body">
+                <form action="/funcPara" method="post">
+                    <div class="form-group">
+                        <label for="f">Function for x:</label>
+                        <textarea class="form-control" rows="1" name="funcX" placeholder="Example: 2*sin(u)"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="f">Function for y:</label>
+                        <textarea class="form-control" rows="1" name="funcY" placeholder="Example: cos(v)*sin(u)"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="f">Function for z:</label>
+                        <textarea class="form-control" rows="1" name="funcZ" placeholder="Example: sin(u)*cos(v) if u < v else cos(u)*sin(v)"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="xmi">Min x:</label>
+                        <input type="text" class="form-control" name="min_u" placeholder="Example: 0.3">
+                    </div>
+                    <div class="form-group">
+                        <label for="xma">Max x:</label>
+                        <input type="text" class="form-control" name="max_u" placeholder="Example: 2*PI">
+                    </div>
+                    <div class="form-group">
+                        <label for="xma">Grid count x:</label>
+                        <input type="text" class="form-control" name="grid_u" placeholder="Example: 4">
+                    </div>
+                    <div class="form-group">
+                        <label for="xma">Min z:</label>
+                        <input type="text" class="form-control" name="min_v" placeholder="Example: E">
+                    </div>
+                    <div class="form-group">
+                        <label for="xma">Max z:</label>
+                        <input type="text" class="form-control" name="max_v" placeholder="Example: 51.1">
+                    </div>
+                    <div class="form-group">
+                        <label for="xma">Grid count z:</label>
+                        <input type="text" class="form-control" name="grid_v" placeholder="Example: 22">
+                    </div>
+                    <button type="submit" class="btn btn-info">Create mesh</button>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="">Download</button>
+
+
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal4">Info</button>
+        <div id="myModal4" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Help</h4>
+              </div>
+              <div class="modal-body" id="testpdf">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script>
+            var options = {
+                width: "55rem",
+                height: "60rem"
+            };
+            PDFObject.embed("{{ url_for('static', filename='help/meshhelp.pdf') }}", "#testpdf", options);
+        </script>
 	</body>
 </html>
 
