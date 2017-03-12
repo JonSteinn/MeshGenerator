@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bcbe4f7f-0096-43c6-9ae6-eec2229ca770" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/models/download/objects.zip" afterPath="$PROJECT_DIR$/static/models/download/objects.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FilePaths.py" afterPath="$PROJECT_DIR$/FilePaths.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Math2Mesh.py" afterPath="$PROJECT_DIR$/Math2Mesh.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/py_scripts/file_handler.py" afterPath="$PROJECT_DIR$/py_scripts/file_handler.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/models/model.obj" afterPath="$PROJECT_DIR$/static/models/model.obj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/scripts/inputValidator.js" afterPath="$PROJECT_DIR$/static/scripts/inputValidator.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/scripts/renderer.js" afterPath="$PROJECT_DIR$/static/scripts/renderer.js" />
-    </list>
+    <list default="true" id="bcbe4f7f-0096-43c6-9ae6-eec2229ca770" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
