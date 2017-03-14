@@ -1,4 +1,5 @@
 import math
+import os
 
 from FilePaths import in_models
 
@@ -109,6 +110,7 @@ def append_file(fd, file_path):
     with open(file_path, 'r') as fd2:
         for line in fd2:
             fd.write(line)
+    os.remove(file_path)
 
 
 def generate_files_xyz(f, x_min, x_max, x_grid_count, z_min, z_max, z_grid_count, fd1, fd2):

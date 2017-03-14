@@ -73,6 +73,7 @@ def func_para():
 @app.route('/dl', methods=['GET'])
 def download():
     try:
+        file_handler.convert_mesh()
         file_handler.zip_objects()
     except:  #TODO: proper err handling
         print(sys.exc_info()[0])

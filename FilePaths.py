@@ -12,3 +12,7 @@ def in_download(filename):
 
 def in_models(filename):
     return os.path.join(MODELS_ROOT, filename)
+
+
+def in_root(filename):
+    return os.path.join(APP_ROOT, filename)
