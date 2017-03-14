@@ -28,6 +28,7 @@ function addObject(){
 
 function addCamera(){
 	camera = new THREE.PerspectiveCamera(90, 1.77777778, 0.1, 1000);
+	camera.eulerOrder = "YXZ";
 	camera.position.set(-10, 0, -10);
 	camera.lookAt(new THREE.Vector3(0,0,0));
 }
@@ -49,35 +50,43 @@ function fillScene(){
 }
 
 
+
 function animate(){
 
 	requestAnimationFrame(animate);
 
-	if(keyboard[87]){
+	// TODO: add const variable up top
+	// E.g. const KEY_A = 87, KEY_LEFT = 37;
+	// and replace numbers with constants
+	if(keyboard[87]){ // W
 		camera.translateZ( -speed );
 	}
-	if(keyboard[83]){
+	if(keyboard[83]){ // S
 		camera.translateZ( speed );
 	}
-	if(keyboard[65]){
+	if(keyboard[65]){ // A
 		camera.translateX( -speed );
 	}
-	if(keyboard[68]){
+	if(keyboard[68]){ // D
 		camera.translateX( speed );
 	}
-	if(keyboard[81]){
+	if(keyboard[81]){ // Q
 		camera.translateY( -speed );
 	}
-	if(keyboard[69]){
+	if(keyboard[69]){ // E
 		camera.translateY( speed );
 	}
-
-
-	if(keyboard[37]){ // left arrow key
+	if(keyboard[37]){ // left
+		camera.rotation.y += speed * 0.25;
+	}
+	if(keyboard[39]){ // right
 		camera.rotation.y -= speed * 0.25;
 	}
-	if(keyboard[39]){ // right arrow key
-		camera.rotation.y += speed * 0.25;
+	if(keyboard[38]){ // up
+		camera.rotation.x += speed * 0.25;
+	}
+	if(keyboard[40]){ // down
+		camera.rotation.x -= speed * 0.25;
 	}
 
 	light.position.set(camera.position.x, camera.position.y, camera.position.z);

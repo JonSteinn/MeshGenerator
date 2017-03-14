@@ -1,10 +1,13 @@
 import math
+import random
 
 
 def parse(command):
-    command = command.translate({ord(c): '' for c in " !@#$%&[]{};:,?\|`~_"})
+    command = command.replace('\n', '').replace('\r', '').replace('\t', '')
+    command = command.translate({ord(c): '' for c in " !@#$%&[]{};:?\|`~_"})
     command = command\
         .replace('lambda', '')\
+        .replace('random', '_')\
         .replace('^', '**')\
         .replace('E', 'math.e')\
         .replace('PI', 'math.pi')\
@@ -41,7 +44,8 @@ def parse(command):
         .replace('else', ' else ')\
         .replace('not', ' not ')\
         .replace('and', ' and ')\
-        .replace('or', ' or ')
+        .replace('or', ' or ')\
+        .replace('_', 'random.uniform')
     return command
 
 
