@@ -80,10 +80,7 @@ def func_noise():
             with open(in_models('model.obj'), 'w') as fd1:
                 with open(in_models('model.mesh.xml'), 'w') as fd2:
                     obj_gen.generate_files_xyz(
-                        lambda x, z: pnoise2(x, z,
-                                             octaves=int(request.form['octaves']),
-                                             persistence=float(request.form['persistence']),
-                                             lacunarity=float(request.form['lacunarity'])),
+                        lambda x, z: float(request.form['amplitude']) * pnoise2(x, z, octaves=int(request.form['octaves']), persistence=float(request.form['persistence']), lacunarity=float(request.form['lacunarity'])),
                         0,
                         float(request.form['gridWidth']),
                         int(request.form['gridCountX']),

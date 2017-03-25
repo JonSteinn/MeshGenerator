@@ -38,7 +38,7 @@ def normalized(v):
 
 
 def cross_product(u, v):
-    return [u[1]*v[2] - u[2]*v[1], u[2]*v[0] - u[0]*v[2], u[0]*v[1] - u[1]*v[0]]
+    return normalized([u[1]*v[2] - u[2]*v[1], u[2]*v[0] - u[0]*v[2], u[0]*v[1] - u[1]*v[0]])
 
 
 def write_obj_quad(quad, fd1, fd2, fd3, index):
@@ -66,7 +66,7 @@ def write_obj_quad_single(quad, fd1, fd2, fd3, index):
     fd1.write('f {:d} {:d} {:d}\n'.format(index + 1, index + 3, index + 4))
     fd1.write('f {:d} {:d} {:d}\n'.format(index + 1, index + 4, index + 2))
     xml_vertex(fd2, quad, normal)
-    xml_faces_single(fd3, index - 1)
+    xml_faces_single(fd3, index)
 
 
 def xml_header(fd, vertices):
@@ -96,8 +96,8 @@ def xml_vertex(fd, quad, normal):
 
 
 def xml_faces_single(fd, index):
-    fd.write('\t\t\t\t<face v1="{:d}" v2="{:d}" v3="{:d}"/>\n'.format(index + 1, index + 3, index + 4))
-    fd.write('\t\t\t\t<face v1="{:d}" v2="{:d}" v3="{:d}"/>\n'.format(index + 1, index + 4, index + 2))
+    fd.write('\t\t\t\t<face v1="{:d}" v2="{:d}" v3="{:d}"/>\n'.format(index, index + 1, index + 3))
+    fd.write('\t\t\t\t<face v1="{:d}" v2="{:d}" v3="{:d}"/>\n'.format(index + 3, index + 2, index))
 
 
 def xml_faces(fd, index):

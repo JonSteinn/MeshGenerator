@@ -5,13 +5,13 @@
 function func3Validate(){
 
     var func = document.getElementById('func3d').value;
-    if (func == "") {
-        toast("Function can't be empty!", 'toast3')
+    if (func === "") {
+        toast("Function can't be empty!", 'toast3');
         return false;
     }
 
     var min_x = document.getElementById('minx').value;
-    if (min_x == "") {
+    if (min_x === "") {
         toast("Min x can't be empty!", 'toast3');
         return false;
     }
@@ -25,7 +25,7 @@ function func3Validate(){
     }
 
     var max_x = document.getElementById('maxx').value;
-    if (max_x == "") {
+    if (max_x === "") {
         toast("Max x can't be empty!", 'toast3');
         return false;
     }
@@ -43,7 +43,7 @@ function func3Validate(){
     }
 
     var grid_x = document.getElementById('gridx').value;
-    if (grid_x == "") {
+    if (grid_x === "") {
         toast("Grid count x can't be empty!", 'toast3');
         return false;
     }
@@ -53,7 +53,7 @@ function func3Validate(){
     }
 
     var min_z = document.getElementById('minz').value;
-    if (min_z == "") {
+    if (min_z === "") {
         toast("Min z can't be empty!", 'toast3');
         return false;
     }
@@ -67,7 +67,7 @@ function func3Validate(){
     }
 
     var max_z = document.getElementById('maxz').value;
-    if (max_z == "") {
+    if (max_z === "") {
         toast("Max z can't be empty!", 'toast3');
         return false;
     }
@@ -85,7 +85,7 @@ function func3Validate(){
     }
 
     var grid_z = document.getElementById('gridz').value;
-    if (grid_z == "") {
+    if (grid_z === "") {
         toast("Grid count z can't be empty!", 'toast3');
         return false;
     }
@@ -104,25 +104,25 @@ function func3Validate(){
 function funcPValidate() {
 
     var funcX = document.getElementById('funcX').value;
-    if (funcX == "") {
+    if (funcX === "") {
         toast("X function can't be empty!", 'toastP');
         return false;
     }
 
     var funcY = document.getElementById('funcY').value;
-    if (funcY == "") {
+    if (funcY === "") {
         toast("Y function can't be empty!", 'toastP');
         return false;
     }
 
     var funcZ = document.getElementById('funcZ').value;
-    if (funcZ == "") {
+    if (funcZ === "") {
         toast("Z function can't be empty!", 'toastP');
         return false;
     }
 
     var min_u = document.getElementById('minu').value;
-    if (min_u == "") {
+    if (min_u === "") {
         toast("Min u can't be empty!", 'toastP');
         return false;
     }
@@ -136,7 +136,7 @@ function funcPValidate() {
     }
 
     var max_u = document.getElementById('maxu').value;
-    if (max_u == "") {
+    if (max_u === "") {
         toast("Max u can't be empty!", 'toastP');
         return false;
     }
@@ -154,7 +154,7 @@ function funcPValidate() {
     }
 
     var grid_u = document.getElementById('gridu').value;
-    if (grid_u == "") {
+    if (grid_u === "") {
         toast("Grid count u can't be empty!", 'toastP');
         return false;
     }
@@ -164,7 +164,7 @@ function funcPValidate() {
     }
 
     var min_v = document.getElementById('minv').value;
-    if (min_v == "") {
+    if (min_v === "") {
         toast("Min v can't be empty!", 'toastP');
         return false;
     }
@@ -178,7 +178,7 @@ function funcPValidate() {
     }
 
     var max_v = document.getElementById('maxv').value;
-    if (max_v == "") {
+    if (max_v === "") {
         toast("Max v can't be empty!", 'toastP');
         return false;
     }
@@ -196,7 +196,7 @@ function funcPValidate() {
     }
 
     var grid_v = document.getElementById('gridv').value;
-    if (grid_v == "") {
+    if (grid_v === "") {
         toast("Grid count v can't be empty!", 'toastP');
         return false;
     }
@@ -214,7 +214,7 @@ function funcPValidate() {
 
 function funcNValidate(){
     var gridWidth = document.getElementById('gridW').value;
-    if (gridWidth == "") {
+    if (gridWidth === "") {
         toast("Grid width can't be empty!", 'toastN');
         return false;
     }
@@ -228,7 +228,7 @@ function funcNValidate(){
     }
 
     var gridLength = document.getElementById('gridL').value;
-    if (gridLength == "") {
+    if (gridLength === "") {
         toast("Grid length can't be empty!", 'toastN');
         return false;
     }
@@ -242,7 +242,7 @@ function funcNValidate(){
     }
 
     var gridWidthCount = document.getElementById("gridCX").value;
-    if (gridWidthCount == "") {
+    if (gridWidthCount === "") {
         toast("Grid x tiles can't be empty!", 'toastN');
         return false;
     }
@@ -256,7 +256,7 @@ function funcNValidate(){
     }
 
     var gridLengthCount = document.getElementById("gridCZ").value;
-    if (gridLengthCount == "") {
+    if (gridLengthCount === "") {
         toast("Grid z tiles can't be empty!", 'toastN');
         return false;
     }
@@ -269,8 +269,22 @@ function funcNValidate(){
         return false;
     }
 
+    var amplitude = document.getElementById("amp").value;
+    if (amplitude === "") {
+        toast("Amplitude can't be empty!", 'toastN');
+        return false;
+    }
+    if (isNaN(amplitude)) {
+        toast("Amplitude must be numeric!", 'toastN');
+        return false;
+    }
+    if (parseFloat(amplitude) <= 0) {
+        toast('Amplitude must be positive!', 'toastN');
+        return false;
+    }
+
     var octaves = document.getElementById("octaves").value;
-    if (octaves == "") {
+    if (octaves === "") {
         toast("Octaves can't be empty!", 'toastN');
         return false;
     }
@@ -284,7 +298,7 @@ function funcNValidate(){
     }
 
     var persistence = document.getElementById("persistence").value;
-    if (persistence == "") {
+    if (persistence === "") {
         toast("Persistence can't be empty!", 'toastN');
         return false;
     }
@@ -298,7 +312,7 @@ function funcNValidate(){
     }
 
     var lacunarity = document.getElementById("lacunarity").value;
-    if (lacunarity == "") {
+    if (lacunarity === "") {
         toast("Lacunarity can't be empty!", 'toastN');
         return false;
     }
@@ -321,7 +335,7 @@ function funcNValidate(){
 
 
 function toast(msg, id) {
-    var x = document.getElementById(id)
+    var x = document.getElementById(id);
     x.innerHTML = msg;
     x.className = "show";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
