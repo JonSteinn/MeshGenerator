@@ -54,6 +54,19 @@ def write_obj_quad(quad, fd1, fd2, fd3, index):
     xml_faces(fd3, index)
 
 
+def write_obj_quad_single(quad, fd1, fd2, fd3, index):
+    normal = cross_product(vec_from_to(quad[0], quad[1]), vec_from_to(quad[0], quad[2]))
+    fd1.write('v {:.6f} {:6f} {:6f}\n'.format(quad[0][0], quad[0][1], quad[0][2]))
+    fd1.write('v {:.6f} {:6f} {:6f}\n'.format(quad[1][0], quad[1][1], quad[1][2]))
+    fd1.write('v {:.6f} {:6f} {:6f}\n'.format(quad[2][0], quad[2][1], quad[2][2]))
+    fd1.write('v {:.6f} {:6f} {:6f}\n'.format(quad[3][0], quad[3][1], quad[3][2]))
+    fd1.write('vn {:.6f} {:6f} {:6f}\n'.format(normal[0], normal[1], normal[2]))
+    fd1.write('f {:d} {:d} {:d}\n'.format(index + 1, index + 3, index + 4))
+    fd1.write('f {:d} {:d} {:d}\n'.format(index + 1, index + 4, index + 2))
+    xml_vertex(fd2, quad, normal)
+    xml_faces(fd3, index)
+
+
 def xml_header(fd, vertices):
     fd.write('<?xml version="1.0" encoding="UTF-8"?>\n')
     fd.write('<mesh>\n')
@@ -113,29 +126,59 @@ def append_file(fd, file_path):
     os.remove(file_path)
 
 
-def generate_files_xyz(f, x_min, x_max, x_grid_count, z_min, z_max, z_grid_count, fd1, fd2):
-    xml_header(fd2, x_grid_count * z_grid_count * 4)
-    with open(in_models('face_temp.txt'), 'w') as fd3:
-        dx = (x_max - x_min) / x_grid_count
-        dz = (z_max - z_min) / z_grid_count
-        for x in range(0, x_grid_count):
-            for z in range(0, z_grid_count):
-                quad = grid_xyz(f, x_min + x * dx, z_min + z * dz, dx, dz)
-                write_obj_quad(quad, fd1, fd2, fd3, z * 4 + (z_grid_count * 4 * x))
-    xml_face_header(fd2, x_grid_count * z_grid_count * 4)
-    append_file(fd2, in_models('face_temp.txt'))
-    xml_end(fd2)
+def generate_files_xyz(f, x_min, x_max, x_grid_count, z_min, z_max, z_grid_count, fd1, fd2, d_sided):
+    #  TODO FIX XML GEN
+    if d_sided:
+        xml_header(fd2, x_grid_count * z_grid_count * 4)
+        with open(in_models('face_temp.txt'), 'w') as fd3:
+            dx = (x_max - x_min) / x_grid_count
+            dz = (z_max - z_min) / z_grid_count
+            for x in range(0, x_grid_count):
+                for z in range(0, z_grid_count):
+                    quad = grid_xyz(f, x_min + x * dx, z_min + z * dz, dx, dz)
+                    write_obj_quad(quad, fd1, fd2, fd3, z * 4 + (z_grid_count * 4 * x))
+        xml_face_header(fd2, x_grid_count * z_grid_count * 4)
+        append_file(fd2, in_models('face_temp.txt'))
+        xml_end(fd2)
+    else:
+        #  TODO MAKE SINGLE FOR XML!
+        xml_header(fd2, x_grid_count * z_grid_count * 4)
+        with open(in_models('face_temp.txt'), 'w') as fd3:
+            dx = (x_max - x_min) / x_grid_count
+            dz = (z_max - z_min) / z_grid_count
+            for x in range(0, x_grid_count):
+                for z in range(0, z_grid_count):
+                    quad = grid_xyz(f, x_min + x * dx, z_min + z * dz, dx, dz)
+                    write_obj_quad_single(quad, fd1, fd2, fd3, z * 4 + (z_grid_count * 4 * x))
+        xml_face_header(fd2, x_grid_count * z_grid_count * 4)
+        append_file(fd2, in_models('face_temp.txt'))
+        xml_end(fd2)
 
 
-def generate_files_parametric(f, u_min, u_max, u_grid_count, v_min, v_max, v_grid_count, fd1, fd2):
-    xml_header(fd2, u_grid_count * v_grid_count * 4)
-    with open(in_models('face_temp.txt'), 'w') as fd3:
-        du = (u_max - u_min) / u_grid_count
-        dv = (v_max - v_min) / v_grid_count
-        for u in range(0, u_grid_count):
-            for v in range(0, v_grid_count):
-                quad = grid_parametric(f, u_min + u * du, v_min + v * dv, du, dv)
-                write_obj_quad(quad, fd1, fd2, fd3, v * 4 + (v_grid_count * 4 * u))
-    xml_face_header(fd2, u_grid_count * v_grid_count * 4)
-    append_file(fd2, in_models('face_temp.txt'))
-    xml_end(fd2)
+def generate_files_parametric(f, u_min, u_max, u_grid_count, v_min, v_max, v_grid_count, fd1, fd2, d_sided):
+    #  TODO FIX XML GEN
+    if d_sided:
+        xml_header(fd2, u_grid_count * v_grid_count * 4)
+        with open(in_models('face_temp.txt'), 'w') as fd3:
+            du = (u_max - u_min) / u_grid_count
+            dv = (v_max - v_min) / v_grid_count
+            for u in range(0, u_grid_count):
+                for v in range(0, v_grid_count):
+                    quad = grid_parametric(f, u_min + u * du, v_min + v * dv, du, dv)
+                    write_obj_quad(quad, fd1, fd2, fd3, v * 4 + (v_grid_count * 4 * u))
+        xml_face_header(fd2, u_grid_count * v_grid_count * 4)
+        append_file(fd2, in_models('face_temp.txt'))
+        xml_end(fd2)
+    else:
+        #  TODO MAKE SINGLE FOR XML!
+        xml_header(fd2, u_grid_count * v_grid_count * 4)
+        with open(in_models('face_temp.txt'), 'w') as fd3:
+            du = (u_max - u_min) / u_grid_count
+            dv = (v_max - v_min) / v_grid_count
+            for u in range(0, u_grid_count):
+                for v in range(0, v_grid_count):
+                    quad = grid_parametric(f, u_min + u * du, v_min + v * dv, du, dv)
+                    write_obj_quad_single(quad, fd1, fd2, fd3, v * 4 + (v_grid_count * 4 * u))
+        xml_face_header(fd2, u_grid_count * v_grid_count * 4)
+        append_file(fd2, in_models('face_temp.txt'))
+        xml_end(fd2)

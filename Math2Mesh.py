@@ -35,7 +35,8 @@ def func3():
                         float(request.form['max_z']),
                         int(request.form['grid_z']),
                         fd1,
-                        fd2
+                        fd2,
+                        bool(request.form.getlist('double_sided'))
                     )
         except (NameError, ValueError, ZeroDivisionError, TypeError, ArithmeticError, FloatingPointError):
             shutil.copy(in_models('error.obj'), in_models('model.obj'))
@@ -60,7 +61,8 @@ def func_para():
                         float(request.form['max_v']),
                         int(request.form['grid_v']),
                         fd1,
-                        fd2
+                        fd2,
+                        bool(request.form.getlist('double_sided'))
                     )
         except (NameError, ValueError, ZeroDivisionError, TypeError, ArithmeticError, FloatingPointError):
             shutil.copy(in_models('error.obj'), in_models('model.obj'))

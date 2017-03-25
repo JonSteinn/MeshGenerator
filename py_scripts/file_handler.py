@@ -1,14 +1,12 @@
 import os
 import zipfile
 from os.path import basename
-
 from FilePaths import in_download, in_models, in_root
 
 
 # TODO: use subprocess
 def convert_mesh():
-    os.system("start /wait cmd /c OgreXMLConverter {}".format(in_models("test.mesh.xml")))
-    os.remove(in_root('py_scripts/OgreXMLConverter.log'))
+    os.system("start /wait cmd /c OgreXMLConverter {}".format(in_models("model.mesh.xml")))
 
 
 def zip_objects():

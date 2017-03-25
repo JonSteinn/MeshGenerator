@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
     <head>
         <title>Math2Mesh</title>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/three.min.js') }}"></script>
@@ -83,6 +83,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <input type="checkbox" name="double_sided" id="ds3d" value="False">Double sided<br><br>
                         <button type="submit" class="btn btn-info" onclick="return func3Validate();">Create mesh</button>
                     </form>
                 </div>
@@ -163,6 +164,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <input type="checkbox" name="double_sided" id="dsP" value="False">Double sided<br><br>
                         <button type="submit" class="btn btn-info" onclick="return funcPValidate();">Create mesh</button>
                     </form>
                 </div>
