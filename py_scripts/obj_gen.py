@@ -1,7 +1,7 @@
 import math
 import os
 
-from noise import snoise2, pnoise2
+from noise import pnoise2
 
 from FilePaths import in_models
 
@@ -66,7 +66,7 @@ def write_obj_quad_single(quad, fd1, fd2, fd3, index):
     fd1.write('f {:d} {:d} {:d}\n'.format(index + 1, index + 3, index + 4))
     fd1.write('f {:d} {:d} {:d}\n'.format(index + 1, index + 4, index + 2))
     xml_vertex(fd2, quad, normal)
-    xml_faces(fd3, index)
+    xml_faces_single(fd3, index - 1)
 
 
 def xml_header(fd, vertices):
@@ -93,6 +93,11 @@ def xml_vertex(fd, quad, normal):
     fd.write('\t\t\t\t<position z="{:.6f}" y="{:.6f}" x="{:.6f}"/>\n'.format(quad[3][0], quad[3][1], quad[3][2]))
     fd.write('\t\t\t\t<normal z="{:.6f}" y="{:.6f}" x="{:.6f}"/>\n'.format(normal[0], normal[1], normal[2]))
     fd.write('\t\t\t</vertex>\n')
+
+
+def xml_faces_single(fd, index):
+    fd.write('\t\t\t\t<face v1="{:d}" v2="{:d}" v3="{:d}"/>\n'.format(index + 1, index + 3, index + 4))
+    fd.write('\t\t\t\t<face v1="{:d}" v2="{:d}" v3="{:d}"/>\n'.format(index + 1, index + 4, index + 2))
 
 
 def xml_faces(fd, index):
@@ -152,7 +157,7 @@ def generate_files_xyz(f, x_min, x_max, x_grid_count, z_min, z_max, z_grid_count
                 for z in range(0, z_grid_count):
                     quad = grid_xyz(f, x_min + x * dx, z_min + z * dz, dx, dz)
                     write_obj_quad_single(quad, fd1, fd2, fd3, z * 4 + (z_grid_count * 4 * x))
-        xml_face_header(fd2, x_grid_count * z_grid_count * 4)
+        xml_face_header(fd2, x_grid_count * z_grid_count * 2)
         append_file(fd2, in_models('face_temp.txt'))
         xml_end(fd2)
 

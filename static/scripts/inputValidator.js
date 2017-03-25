@@ -219,11 +219,11 @@ function funcNValidate(){
         return false;
     }
     if (isNaN(gridWidth)) {
-        toast("Grid width must be numeric!", 'toastP');
+        toast("Grid width must be numeric!", 'toastN');
         return false;
     }
     if (parseFloat(gridWidth) <= 0) {
-        toast('Grid width must be positive!', 'toastP');
+        toast('Grid width must be positive!', 'toastN');
         return false;
     }
 
@@ -233,11 +233,11 @@ function funcNValidate(){
         return false;
     }
     if (isNaN(gridLength)) {
-        toast("Grid length must be numeric!", 'toastP');
+        toast("Grid length must be numeric!", 'toastN');
         return false;
     }
     if (parseFloat(gridLength) <= 0) {
-        toast('Grid length must be positive!', 'toastP');
+        toast('Grid length must be positive!', 'toastN');
         return false;
     }
 
@@ -247,11 +247,11 @@ function funcNValidate(){
         return false;
     }
     if (!isInt(gridWidthCount)) {
-        toast("Grid x tiles must be an integer!", 'toastP');
+        toast("Grid x tiles must be an integer!", 'toastN');
         return false;
     }
     if (parseInt(gridWidthCount) <= 0) {
-        toast("Grid x tiles must be positive!", 'toastP');
+        toast("Grid x tiles must be positive!", 'toastN');
         return false;
     }
 
@@ -261,11 +261,11 @@ function funcNValidate(){
         return false;
     }
     if (!isInt(gridLengthCount)) {
-        toast("Grid z tiles must be an integer!", 'toastP');
+        toast("Grid z tiles must be an integer!", 'toastN');
         return false;
     }
     if (parseInt(gridLengthCount) <= 0) {
-        toast("Grid z tiles must be positive!", 'toastP');
+        toast("Grid z tiles must be positive!", 'toastN');
         return false;
     }
 
@@ -275,11 +275,11 @@ function funcNValidate(){
         return false;
     }
     if (!isInt(octaves)) {
-        toast("Octaves must be an integer!", 'toastP');
+        toast("Octaves must be an integer!", 'toastN');
         return false;
     }
     if (parseInt(octaves) <= 0) {
-        toast("Octaves must be positive!", 'toastP');
+        toast("Octaves must be positive!", 'toastN');
         return false;
     }
 
@@ -289,11 +289,11 @@ function funcNValidate(){
         return false;
     }
     if (isNaN(persistence)) {
-        toast("Persistence must be numeric!", 'toastP');
+        toast("Persistence must be numeric!", 'toastN');
         return false;
     }
     if (parseFloat(persistence) <= 0) {
-        toast('Persistence must be positive!', 'toastP');
+        toast('Persistence must be positive!', 'toastN');
         return false;
     }
 
@@ -303,16 +303,16 @@ function funcNValidate(){
         return false;
     }
     if (isNaN(lacunarity)) {
-        toast("Lacunarity must be numeric!", 'toastP');
+        toast("Lacunarity must be numeric!", 'toastN');
         return false;
     }
     if (parseFloat(lacunarity) <= 0) {
-        toast('Lacunarity must be positive!', 'toastP');
+        toast('Lacunarity must be positive!', 'toastN');
         return false;
     }
 
     if (parseInt(gridWidthCount) * parseInt(gridLengthCount) > 250000) {
-        toast("Total tiles (x * z) can't exceed 25000!", 'toastP');
+        toast("Total tiles (x * z) can't exceed 25000!", 'toastN');
         return false;
     }
 
