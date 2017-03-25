@@ -212,6 +212,113 @@ function funcPValidate() {
     return true;
 }
 
+function funcNValidate(){
+    var gridWidth = document.getElementById('gridW').value;
+    if (gridWidth == "") {
+        toast("Grid width can't be empty!", 'toastN');
+        return false;
+    }
+    if (isNaN(gridWidth)) {
+        toast("Grid width must be numeric!", 'toastP');
+        return false;
+    }
+    if (parseFloat(gridWidth) <= 0) {
+        toast('Grid width must be positive!', 'toastP');
+        return false;
+    }
+
+    var gridLength = document.getElementById('gridL').value;
+    if (gridLength == "") {
+        toast("Grid length can't be empty!", 'toastN');
+        return false;
+    }
+    if (isNaN(gridLength)) {
+        toast("Grid length must be numeric!", 'toastP');
+        return false;
+    }
+    if (parseFloat(gridLength) <= 0) {
+        toast('Grid length must be positive!', 'toastP');
+        return false;
+    }
+
+    var gridWidthCount = document.getElementById("gridCX").value;
+    if (gridWidthCount == "") {
+        toast("Grid x tiles can't be empty!", 'toastN');
+        return false;
+    }
+    if (!isInt(gridWidthCount)) {
+        toast("Grid x tiles must be an integer!", 'toastP');
+        return false;
+    }
+    if (parseInt(gridWidthCount) <= 0) {
+        toast("Grid x tiles must be positive!", 'toastP');
+        return false;
+    }
+
+    var gridLengthCount = document.getElementById("gridCZ").value;
+    if (gridLengthCount == "") {
+        toast("Grid z tiles can't be empty!", 'toastN');
+        return false;
+    }
+    if (!isInt(gridLengthCount)) {
+        toast("Grid z tiles must be an integer!", 'toastP');
+        return false;
+    }
+    if (parseInt(gridLengthCount) <= 0) {
+        toast("Grid z tiles must be positive!", 'toastP');
+        return false;
+    }
+
+    var octaves = document.getElementById("octaves").value;
+    if (octaves == "") {
+        toast("Octaves can't be empty!", 'toastN');
+        return false;
+    }
+    if (!isInt(octaves)) {
+        toast("Octaves must be an integer!", 'toastP');
+        return false;
+    }
+    if (parseInt(octaves) <= 0) {
+        toast("Octaves must be positive!", 'toastP');
+        return false;
+    }
+
+    var persistence = document.getElementById("persistence").value;
+    if (persistence == "") {
+        toast("Persistence can't be empty!", 'toastN');
+        return false;
+    }
+    if (isNaN(persistence)) {
+        toast("Persistence must be numeric!", 'toastP');
+        return false;
+    }
+    if (parseFloat(persistence) <= 0) {
+        toast('Persistence must be positive!', 'toastP');
+        return false;
+    }
+
+    var lacunarity = document.getElementById("lacunarity").value;
+    if (lacunarity == "") {
+        toast("Lacunarity can't be empty!", 'toastN');
+        return false;
+    }
+    if (isNaN(lacunarity)) {
+        toast("Lacunarity must be numeric!", 'toastP');
+        return false;
+    }
+    if (parseFloat(lacunarity) <= 0) {
+        toast('Lacunarity must be positive!', 'toastP');
+        return false;
+    }
+
+    if (parseInt(gridWidthCount) * parseInt(gridLengthCount) > 250000) {
+        toast("Total tiles (x * z) can't exceed 25000!", 'toastP');
+        return false;
+    }
+
+    return true;
+}
+
 
 function toast(msg, id) {
     var x = document.getElementById(id)

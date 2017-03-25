@@ -6,6 +6,7 @@ from flask import redirect
 from flask import render_template
 from flask import request
 from flask import send_from_directory
+from noise import pnoise2
 
 from FilePaths import in_models
 from py_scripts import functions, obj_gen, file_handler
@@ -63,6 +64,35 @@ def func_para():
                         fd1,
                         fd2,
                         bool(request.form.getlist('double_sided'))
+                    )
+        except (NameError, ValueError, ZeroDivisionError, TypeError, ArithmeticError, FloatingPointError):
+            shutil.copy(in_models('error.obj'), in_models('model.obj'))
+            print(sys.exc_info()[0])
+        except:  # TODO: remove
+            print(sys.exc_info()[0])
+    return redirect('/')
+
+
+@app.route('/funcNoise', methods=['POST'])
+def func_noise():
+    if request.method == 'POST':
+        try:
+            with open(in_models('model.obj'), 'w') as fd1:
+                with open(in_models('model.mesh.xml'), 'w') as fd2:
+                    obj_gen.generate_files_xyz(
+                        lambda x, z: pnoise2(x, z,
+                                             octaves=int(request.form['octaves']),
+                                             persistence=float(request.form['persistence']),
+                                             lacunarity=float(request.form['lacunarity'])),
+                        0,
+                        float(request.form['gridWidth']),
+                        int(request.form['gridCountX']),
+                        0,
+                        float(request.form['gridLength']),
+                        int(request.form['gridCountZ']),
+                        fd1,
+                        fd2,
+                        False
                     )
         except (NameError, ValueError, ZeroDivisionError, TypeError, ArithmeticError, FloatingPointError):
             shutil.copy(in_models('error.obj'), in_models('model.obj'))

@@ -1,6 +1,8 @@
 import math
 import os
 
+from noise import snoise2, pnoise2
+
 from FilePaths import in_models
 
 
