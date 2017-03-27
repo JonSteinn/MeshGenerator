@@ -15,12 +15,13 @@
 
     <body>
 
-    <h1>Math2Mesh</h1>
+    <h1 align="center">MeshGen</h1>
 
-    <div>
+    <div align="center">
         <div id="display"></div>
     </div>
 
+    <div align="center">
     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">&#8477;<sup>2</sup> &#8594; &#8477;</button>
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -30,7 +31,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">A mapping of the xz-plane onto y</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" align="left">
                     <form action="/func3" method="post">
                         <div class="form-group">
                             <label for="f">Function:</label>
@@ -83,7 +84,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <input type="checkbox" name="double_sided" id="ds3d" value="False">Double sided<br><br>
                         <button type="submit" class="btn btn-info" onclick="return func3Validate();">Create mesh</button>
                     </form>
                 </div>
@@ -103,7 +103,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">A mapping from a uv-plane onto (x,y,z)</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" align="left">
                     <form action="/funcPara" method="post">
                         <div class="form-group">
                             <label for="f">Function for x:</label>
@@ -184,25 +184,25 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Generate noise height for a grid on the (x,z)-plane</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" align="left">
                     <form action="/funcNoise" method="post">
                         <div class="form-group">
                             <label for="f">Grid width (x):</label>
-                            <input type="text" class="form-control" name="gridWidth" id="gridW" size="5">
+                            <input type="text" class="form-control" name="gridWidth" id="gridW" value="15" size="5">
                             <label for="f">Grid width (z):</label>
-                            <input type="text" class="form-control" name="gridLength" id="gridL" size="5">
+                            <input type="text" class="form-control" name="gridLength" id="gridL" value="15" size="5">
                             <label for="f">Grid count (x):</label>
-                            <input type="text" class="form-control" name="gridCountX" id="gridCX" size="5">
+                            <input type="text" class="form-control" name="gridCountX" id="gridCX" value="200" size="5">
                             <label for="f">Grid count (z):</label>
-                            <input type="text" class="form-control" name="gridCountZ" id="gridCZ" size="5">
-                            <label for="f">amplitude</label>
-                            <input type="text" class="form-control" name="amplitude" id="amp" size="5">
+                            <input type="text" class="form-control" name="gridCountZ" id="gridCZ" value="200" size="5">
+                            <label for="f">Amplitude</label>
+                            <input type="text" class="form-control" name="amplitude" id="amp" value="1.0" size="5">
                             <label for="f">Octaves</label>
-                            <input type="text" class="form-control" name="octaves" id="octaves" size="5">
+                            <input type="text" class="form-control" name="octaves" id="octaves" value="1" size="5">
                             <label for="f">Persistence</label>
-                            <input type="text" class="form-control" name="persistence" id="persistence" size="5">
+                            <input type="text" class="form-control" name="persistence" id="persistence" value="0.5" size="5">
                             <label for="f">Lacunarity</label>
-                            <input type="text" class="form-control" name="lacunarity" id="lacunarity" size="5">
+                            <input type="text" class="form-control" name="lacunarity" id="lacunarity" value="2.0" size="5">
                         </div>
                         <button type="submit" class="btn btn-info" onclick="return funcNValidate();">Create mesh</button>
                     </form>
@@ -226,7 +226,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Help</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" align="left">
                     TODO <!--TODO-->
                 </div>
                 <div class="modal-footer">
@@ -234,6 +234,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
     </body>
 

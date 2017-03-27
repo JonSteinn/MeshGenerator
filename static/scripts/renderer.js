@@ -13,16 +13,11 @@ function init(){
 }
 
 function addObject(){
-	var mtlLoader = new THREE.MTLLoader();
-	mtlLoader.load("", function(materials) {
-		materials.preload();
-		var objLoader = new THREE.OBJLoader();
-		objLoader.setMaterials(materials);
-		objLoader.load("/static/models/model.obj", function(mesh){
-			scene.add(mesh);
-			mesh.position.set(0, 0, 0);
-			mesh.rotation.y = -Math.PI/4;
-		});
+	var objLoader = new THREE.OBJLoader();
+	objLoader.load("/static/models/model.obj", function(mesh){
+		scene.add(mesh);
+		mesh.position.set(0, 0, 0);
+		mesh.rotation.y = -Math.PI/4;
 	});
 }
 
@@ -50,9 +45,7 @@ function fillScene(){
 }
 
 
-
 function animate(){
-
 	requestAnimationFrame(animate);
 
 	// TODO: add const variable up top
@@ -100,8 +93,6 @@ function keyDown(event){
 function keyUp(event){
 	keyboard[event.keyCode] = false;
 }
-
-
 
 window.addEventListener('keydown', keyDown);
 window.addEventListener('keyup', keyUp);

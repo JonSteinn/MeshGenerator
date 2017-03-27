@@ -51,6 +51,10 @@ function func3Validate(){
         toast('Grid count x must be an integer!', 'toast3');
         return false;
     }
+    if (parseInt(grid_x) <= 0) {
+        toast('Grid count x must be positive', 'toast3')
+        return false;
+    }
 
     var min_z = document.getElementById('minz').value;
     if (min_z === "") {
@@ -91,6 +95,10 @@ function func3Validate(){
     }
     if (!isInt(grid_z)) {
         toast('Grid count z must be an integer!', 'toast3');
+        return false;
+    }
+    if (parseInt(grid_z) <= 0) {
+        toast('Grid count z must be positive', 'toast3')
         return false;
     }
     if (parseInt(grid_x) * parseInt(grid_z) > 250000) {
@@ -162,6 +170,10 @@ function funcPValidate() {
         toast('Grid count u must be an integer!', 'toastP');
         return false;
     }
+    if (parseInt(grid_u) <= 0) {
+        toast('Grid count u must be positive', 'toastP')
+        return false;
+    }
 
     var min_v = document.getElementById('minv').value;
     if (min_v === "") {
@@ -202,6 +214,10 @@ function funcPValidate() {
     }
     if (!isInt(grid_v)) {
         toast('Grid count v must be an integer!', 'toastP');
+        return false;
+    }
+    if (parseInt(grid_v) <= 0) {
+        toast('Grid count v must be positive', 'toastP')
         return false;
     }
     if (parseInt(grid_u) * parseInt(grid_v) > 250000) {
