@@ -25,16 +25,28 @@ def func3():
     if request.method == 'POST':
         try:
             with open(in_models('model.obj'), 'w') as fd1:
-                xz_func_gen.generate_xz_func_file(
-                    functions.eval_xyz(request.form['func']),
-                    float(request.form['min_x']),
-                    float(request.form['max_x']),
-                    int(request.form['grid_x']),
-                    float(request.form['min_z']),
-                    float(request.form['max_z']),
-                    int(request.form['grid_z']),
-                    fd1
-                )
+                if bool(request.form.getlist('t3d3')):
+                    xz_func_gen.generate_xz_func_file_tex_len(
+                        functions.eval_xyz(request.form['func']),
+                        float(request.form['min_x']),
+                        float(request.form['max_x']),
+                        int(request.form['grid_x']),
+                        float(request.form['min_z']),
+                        float(request.form['max_z']),
+                        int(request.form['grid_z']),
+                        fd1
+                    )
+                else:
+                    xz_func_gen.generate_xz_func_file(
+                        functions.eval_xyz(request.form['func']),
+                        float(request.form['min_x']),
+                        float(request.form['max_x']),
+                        int(request.form['grid_x']),
+                        float(request.form['min_z']),
+                        float(request.form['max_z']),
+                        int(request.form['grid_z']),
+                        fd1
+                    )
         except (NameError, ValueError, ZeroDivisionError, TypeError, ArithmeticError, FloatingPointError):
             shutil.copy(in_models('error.obj'), in_models('model.obj'))
             file_handler.remove_temps()
@@ -74,23 +86,36 @@ def func_noise():
     if request.method == 'POST':
         try:
             with open(in_models('model.obj'), 'w') as fd1:
-                noise_gen.generate_noise_file(
-                    lambda x, z: float(request.form['amplitude']) * pnoise2(
-                        x, z, octaves=int(request.form['octaves']),
-                        persistence=float(request.form['persistence']),
-                        lacunarity=float(request.form['lacunarity'])),
-                    float(request.form['gridWidth']),
-                    int(request.form['gridCountX']),
-                    float(request.form['gridLength']),
-                    int(request.form['gridCountZ']),
-                    fd1
-                )
+                if bool(request.form.getlist('t3d')):
+                    noise_gen.generate_noise_file_tex_len(
+                        lambda x, z: float(request.form['amplitude']) * pnoise2(
+                            x, z, octaves=int(request.form['octaves']),
+                            persistence=float(request.form['persistence']),
+                            lacunarity=float(request.form['lacunarity'])),
+                        float(request.form['gridWidth']),
+                        int(request.form['gridCountX']),
+                        float(request.form['gridLength']),
+                        int(request.form['gridCountZ']),
+                        fd1
+                    )
+                else:
+                    noise_gen.generate_noise_file(
+                        lambda x, z: float(request.form['amplitude']) * pnoise2(
+                            x, z, octaves=int(request.form['octaves']),
+                            persistence=float(request.form['persistence']),
+                            lacunarity=float(request.form['lacunarity'])),
+                        float(request.form['gridWidth']),
+                        int(request.form['gridCountX']),
+                        float(request.form['gridLength']),
+                        int(request.form['gridCountZ']),
+                        fd1
+                    )
         except (NameError, ValueError, ZeroDivisionError, TypeError, ArithmeticError, FloatingPointError):
             shutil.copy(in_models('error.obj'), in_models('model.obj'))
             file_handler.remove_temps()
             print(sys.exc_info()[0])
         except:  # TODO: remove
-            print(sys.exc_info()[0])
+            print(sys.exc_info())
     return redirect('/')
 
 

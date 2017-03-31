@@ -84,6 +84,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <input type="checkbox" name="t3d3" id="t3d3" value="False">Length based texture coordinates<br><br>
                         <button type="submit" class="btn btn-info" onclick="return func3Validate();">Create mesh</button>
                     </form>
                 </div>
@@ -188,13 +189,13 @@
                     <form action="/funcNoise" method="post">
                         <div class="form-group">
                             <label for="f">Grid width (x):</label>
-                            <input type="text" class="form-control" name="gridWidth" id="gridW" value="15" size="5">
+                            <input type="text" class="form-control" name="gridWidth" id="gridW" value="5" size="5">
                             <label for="f">Grid width (z):</label>
-                            <input type="text" class="form-control" name="gridLength" id="gridL" value="15" size="5">
+                            <input type="text" class="form-control" name="gridLength" id="gridL" value="5" size="5">
                             <label for="f">Grid count (x):</label>
-                            <input type="text" class="form-control" name="gridCountX" id="gridCX" value="200" size="5">
+                            <input type="text" class="form-control" name="gridCountX" id="gridCX" value="20" size="5">
                             <label for="f">Grid count (z):</label>
-                            <input type="text" class="form-control" name="gridCountZ" id="gridCZ" value="200" size="5">
+                            <input type="text" class="form-control" name="gridCountZ" id="gridCZ" value="20" size="5">
                             <label for="f">Amplitude</label>
                             <input type="text" class="form-control" name="amplitude" id="amp" value="1.0" size="5">
                             <label for="f">Octaves</label>
@@ -204,6 +205,7 @@
                             <label for="f">Lacunarity</label>
                             <input type="text" class="form-control" name="lacunarity" id="lacunarity" value="2.0" size="5">
                         </div>
+                        <input type="checkbox" name="t3d" id="t3d" value="False">Length based texture coordinates<br><br>
                         <button type="submit" class="btn btn-info" onclick="return funcNValidate();">Create mesh</button>
                     </form>
                 </div>
