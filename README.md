@@ -14,3 +14,4 @@ A web GUI for generating, previewing and exporting .obj file meshes with math fu
 [Download](https://github.com/JonSteinn/MeshGenerator/raw/master/docs/presentation/main.pdf)
 
 ## Demo
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/V0p6-w7R5rY/0.jpg)](https://www.youtube.com/watch?v=V0p6-w7R5rY)
